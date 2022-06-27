@@ -92,7 +92,7 @@ impl BGRA {
     ///Encodes a new image.
     ///
     /// The size of the data must match the provided width and height.
-    fn new(width: u16, height: u16, data: &[PixelBGRA]) -> BGRA {
+    pub fn new(width: u16, height: u16, data: &[PixelBGRA]) -> BGRA {
         //header + data
         let allocation_size = std::mem::size_of::<Header>() + std::mem::size_of::<PixelBGRA>() * data.len();
         let data_offset = std::mem::size_of::<Header>() - 1; //because index 0 is written to, lol.  fucking oboes
