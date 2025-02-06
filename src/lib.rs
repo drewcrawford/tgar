@@ -68,7 +68,7 @@ A BGRA pixel format.
 Defined to be the 32-bit BGRA pixel.  Each b,g,r,a component is a u8.
 */
 #[repr(C)]
-#[derive(Clone)]
+#[derive(Debug,Clone,Copy,PartialEq,Eq,Hash)]
 pub struct PixelBGRA {
     //seems to be BGRA in practice
     pub b: u8,
@@ -80,6 +80,7 @@ pub struct PixelBGRA {
 /**
 An image encoded in TGA format.  32-bit, BGRA data.
 */
+#[derive(Debug,Clone,PartialEq,Eq,Hash)]
 pub struct BGRA {
     data: Box<[u8]>,
 }
@@ -116,6 +117,67 @@ impl BGRA {
         }
     }
 }
+//boilerplate
+impl Default for PixelBGRA {
+    fn default() -> Self {
+        PixelBGRA {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 0,
+        }
+    }
+}
+
+impl From<(u8,u8,u8,u8)> for PixelBGRA {
+    fn from((r,g,b,a): (u8,u8,u8,u8)) -> Self {
+        PixelBGRA {
+            r,g,b,a
+        }
+    }
+}
+
+impl From<PixelBGRA> for (u8,u8,u8,u8) {
+    fn from(p: PixelBGRA) -> Self {
+        (p.r,p.g,p.b,p.a)
+    }
+}
+
+impl Default for BGRA {
+    fn default() -> Self {
+        BGRA {
+            data: Box::new([])
+        }
+    }
+}
+
+impl From<Box<[u8]>> for BGRA {
+    fn from(data: Box<[u8]>) -> Self {
+        BGRA {
+            data
+        }
+    }
+}
+
+impl From<BGRA> for Box<[u8]> {
+    fn from(bgra: BGRA) -> Self {
+        bgra.data
+    }
+}
+
+impl AsRef<[u8]> for BGRA {
+    fn as_ref(&self) -> &[u8] {
+        &self.data
+    }
+}
+
+impl AsMut<[u8]> for BGRA {
+    fn as_mut(&mut self) -> &mut [u8] {
+        &mut self.data
+    }
+}
+
+
 ///Unit tests.
 #[cfg(test)]
 mod tests {
@@ -178,3 +240,7 @@ mod tests {
         file.write(&data).unwrap();
     }
 }
+
+
+
+
