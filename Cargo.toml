@@ -1,7 +1,15 @@
 [package]
 name = "tgar"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
+
+authors = ["Drew Crawford <drew@sealedabstract.com>"]
+rust-version = "1.78.0"
+description = "Simplest TGA library"
+license = "MIT OR Apache-2.0"
+keywords = ["tga", "image", "graphics","targa"]
+categories = ["encoding","multimedia::images", "graphics"]
+exclude = [".*"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

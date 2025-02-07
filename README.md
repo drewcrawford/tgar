@@ -1,5 +1,8 @@
 # tgar
 
+![logo](art/logo.png)
+
+
 This is the world's simplest way to write images from Rust in the TGA format.
 It is one single file and has no dependencies.
 

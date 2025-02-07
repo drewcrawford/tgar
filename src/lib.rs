@@ -1,5 +1,7 @@
 /*!
 
+![logo](art/logo.png)
+
 This is the world's simplest way to write images from Rust in the TGA format. It is one single file and has no dependencies.
 
 If you are looking for a drop-dead simple way to write images to open in your image editor, and have a tab open on BMP and TIFF formats right now trying to figure out which one you can emit using a for loop, this is the crate you are looking for. TGA is a widely supported but trivial file format. This library supports BGRA 32-bit uncompressed images only, a popular and trivial subset.
@@ -95,8 +97,8 @@ impl BGRA {
     /// The size of the data must match the provided width and height.
     pub fn new(width: u16, height: u16, data: &[PixelBGRA]) -> BGRA {
         //header + data
-        let allocation_size = std::mem::size_of::<Header>() + std::mem::size_of::<PixelBGRA>() * data.len();
-        let data_offset = std::mem::size_of::<Header>() - 1; //because index 0 is written to, lol.  fucking oboes
+        let allocation_size = core::mem::size_of::<Header>() + core::mem::size_of::<PixelBGRA>() * data.len();
+        let data_offset = core::mem::size_of::<Header>() - 1; //because index 0 is written to, lol.  fucking oboes
         assert!(width as usize * height as usize == data.len());
         let mut buf = Vec::with_capacity(allocation_size);
         unsafe{
