@@ -9,6 +9,7 @@ If you are looking for a drop-dead simple way to write images to open in your im
 I designed this library to dump GPU textures for debugging purposes, but it is suitable for a wide variety of applications.
 
 */
+
 #[repr(C)]
 struct ImageSpecification {
     x_origin: u16,
